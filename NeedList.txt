@@ -1,0 +1,25 @@
+ - "alphabet"
+ - strings
+ - string add/sub
+
+ - #numbers#
+ - ints
+ - int add/sub/div/mul
+
+ - read
+ - write
+
+ - if
+ - else
+ - while
+ - equals
+ - equals equals
+ - not
+ - and
+ - or
+
+?label
+?goto
+
+?split - multithread
+?peel - exit
