@@ -195,42 +195,41 @@ traslateList['?'] = "bAnanAs"
 traslateList['>'] = "bAnanaS"
 traslateList['<'] = "bAnanas"
 
+//String operators
+baNANAS not equals
+baNANAs >
+baNANaS <
+baNANas mod
+baNAnAS div
+baNAnAs mul
+baNAnaS sub
+baNAnas add
+baNaNAS Rshift
+baNaNAs Lshift
+baNaNaS and
+baNaNas or
+baNanAS xor
+baNanAs add (join)
+baNanaS equals equals
+baNanas equals
 
-//first 8 strings
-baNANAS reg1
-baNANAs reg2
-baNANaS reg3
-baNANas reg4
-baNAnAS reg5
-baNAnAs reg6
-baNAnaS reg7
-baNAnas reg8
+//String regs
+banANAS reg1
+banANAs reg2
+banANaS reg3
+banANas reg4
+banAnAS reg5
+banAnAs reg6
+banAnaS reg7
+banAnas reg8
 
-//second 8 ints
-baNaNAS reg9
-baNaNAs reg10
-baNaNaS reg11
-baNaNas reg12
-baNanAS reg13
-baNanAs reg14
-baNanaS reg15
-baNanas reg16
+// Boolean Evaluators
+banaNAS if
+banaNAs else
+banaNaS while
+banaNas for
 
-banANAS if
-banANAs else
-banANaS equals equals
-banANas not
-banAnAS and
-banAnAs or
-banAnaS while
-banAnas equals (reassign)
-
-banaNAS add
-banaNAs sub
-banaNaS mul
-banaNas div
-
-bananAS
+bananAS extend
 bananAs goto #forward
 
 bananaS read
