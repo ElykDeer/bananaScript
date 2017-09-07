@@ -150,7 +150,9 @@ traslateList['X'] = "BanANAs"
 traslateList['Y'] = "BanANaS"
 traslateList['Z'] = "BanANas"
 traslateList[' '] = "BanAnAS"
+
 traslateList['-1'] = "BanAnAs"
+
 traslateList['0'] = "BanAnaS"
 traslateList['1'] = "BanAnas"
 traslateList['2'] = "BanaNAS"
@@ -209,7 +211,7 @@ baNaNAs Lshift
 baNaNaS and
 baNaNas or
 baNanAS xor
-baNanAs add (join)
+baNanAs 
 baNanaS equals equals
 baNanas equals
 
@@ -225,7 +227,7 @@ banAnas reg8
 
 // Boolean Evaluators
 banaNAS if
-banaNAs else
+banaNAs
 banaNaS while
 banaNas for
 
