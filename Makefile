@@ -1,2 +1,2 @@
 all: main.cpp
-	g++ -Wall -Wextra -pedantic -std=c++11 main.cpp -o monkeyDo
+	g++ -Ofast -Wall -Wextra -pedantic -std=c++11 main.cpp -o monkeyDo
