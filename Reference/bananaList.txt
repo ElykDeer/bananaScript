@@ -51,7 +51,7 @@ traslateList["BanANAs"] = 'X';
 traslateList["BanANaS"] = 'Y';
 traslateList["BanANas"] = 'Z';
 traslateList["BanAnAS"] = ' ';
-traslateList["BanAnAs"] = '-1';
+traslateList["BanAnAs"] = '\n';
 traslateList["BanAnaS"] = '0';
 traslateList["BanAnas"] = '1';
 traslateList["BanaNAS"] = '2';
@@ -190,7 +190,7 @@ traslateList['+'] = "bAnAnaS"
 traslateList['{'] = "bAnAnas"
 traslateList['}'] = "bAnaNAS"
 traslateList['|'] = "bAnaNAs"
-traslateList['\'] = "bAnaNaS"
+traslateList['\\'] = "bAnaNaS"
 traslateList[':'] = "bAnaNas"
 traslateList['"'] = "bAnanAS"
 traslateList['?'] = "bAnanAs"
@@ -211,7 +211,7 @@ baNaNAs Lshift
 baNaNaS and
 baNaNas or
 baNanAS xor
-baNanAs 
+baNanAs
 baNanaS equals equals
 baNanas equals
 
@@ -236,3 +236,38 @@ bananAs goto #forward
 
 bananaS read
 bananas write
+
+//int regs
+bananAS banaNAS if
+bananAS banANAS reg1
+bananAS banANAs reg2
+bananAS banANaS reg3
+bananAS banANas reg4
+bananAS banAnAS reg5
+bananAS banAnAs reg6
+bananAS banAnaS reg7
+bananAS banAnas reg8
+
+//int operators
+baNANAS not equals
+
+baNAnAS div
+baNAnAs mul
+baNAnaS sub
+baNAnas add
+
+baNanaS equals equals
+baNanas equals
+
+int64_t num1 = 0;
+for (size_t i = 0; (i < 64) && (i < reg1->size()); ++i)
+{
+    if ((*reg1)[i] == 'B' || (*reg1)[i] == 'A' || (*reg1)[i] == 'N' || (*reg2)[i] == 'S')
+    {
+        num1 <<= 1;
+    }
+    else if ((*reg1)[i] == 'b' || (*reg1)[i] == 'a' || (*reg1)[i] == 'n' || (*reg2)[i] == 's')
+    {
+        num1 <<= 0;
+    }
+}

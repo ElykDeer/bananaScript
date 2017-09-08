@@ -172,6 +172,119 @@ string bs2e(const string& bananaString, map<string, char>& translateList)
     return convertedString;
 }
 
+string e2bs(const string& englishString)
+{
+    map<char, string> translateList;
+    translateList['a'] = "BANANAS";
+    translateList['b'] = "BANANAs";
+    translateList['c'] = "BANANaS";
+    translateList['d'] = "BANANas";
+    translateList['e'] = "BANAnAS";
+    translateList['f'] = "BANAnAs";
+    translateList['g'] = "BANAnaS";
+    translateList['h'] = "BANAnas";
+    translateList['i'] = "BANaNAS";
+    translateList['j'] = "BANaNAs";
+    translateList['k'] = "BANaNaS";
+    translateList['l'] = "BANaNas";
+    translateList['m'] = "BANanAS";
+    translateList['n'] = "BANanAs";
+    translateList['o'] = "BANanaS";
+    translateList['p'] = "BANanas";
+    translateList['q'] = "BAnANAS";
+    translateList['r'] = "BAnANAs";
+    translateList['s'] = "BAnANaS";
+    translateList['t'] = "BAnANas";
+    translateList['u'] = "BAnAnAS";
+    translateList['v'] = "BAnAnAs";
+    translateList['w'] = "BAnAnaS";
+    translateList['x'] = "BAnAnas";
+    translateList['y'] = "BAnaNAS";
+    translateList['z'] = "BAnaNAs";
+    translateList['A'] = "BAnaNaS";
+    translateList['B'] = "BAnaNas";
+    translateList['C'] = "BAnanAS";
+    translateList['D'] = "BAnanAs";
+    translateList['E'] = "BAnanaS";
+    translateList['F'] = "BAnanas";
+    translateList['G'] = "BaNANAS";
+    translateList['H'] = "BaNANAs";
+    translateList['I'] = "BaNANaS";
+    translateList['J'] = "BaNANas";
+    translateList['K'] = "BaNAnAS";
+    translateList['L'] = "BaNAnAs";
+    translateList['M'] = "BaNAnaS";
+    translateList['N'] = "BaNAnas";
+    translateList['O'] = "BaNaNAS";
+    translateList['P'] = "BaNaNAs";
+    translateList['Q'] = "BaNaNaS";
+    translateList['R'] = "BaNaNas";
+    translateList['S'] = "BaNanAS";
+    translateList['T'] = "BaNanAs";
+    translateList['U'] = "BaNanaS";
+    translateList['V'] = "BaNanas";
+    translateList['W'] = "BanANAS";
+    translateList['X'] = "BanANAs";
+    translateList['Y'] = "BanANaS";
+    translateList['Z'] = "BanANas";
+    translateList[' '] = "BanAnAS";
+
+    translateList['0'] = "BanAnaS";
+    translateList['1'] = "BanAnas";
+    translateList['2'] = "BanaNAS";
+    translateList['3'] = "BanaNAs";
+    translateList['4'] = "BanaNaS";
+    translateList['5'] = "BanaNas";
+    translateList['6'] = "BananAS";
+    translateList['7'] = "BananAs";
+    translateList['8'] = "BananaS";
+    translateList['9'] = "Bananas";
+
+    translateList[','] = "bANANAS";
+    translateList['.'] = "bANANAs";
+    translateList['/'] = "bANANaS";
+    translateList[';'] = "bANANas";
+    translateList['\''] = "bANAnAS";
+    translateList['['] = "bANAnAs";
+    translateList[']'] = "bANAnaS";
+    translateList['='] = "bANAnas";
+    translateList['-'] = "bANaNAS";
+    translateList['`'] = "bANaNAs";
+    translateList['~'] = "bANaNaS";
+    translateList['!'] = "bANaNas";
+    translateList['@'] = "bANanAS";
+    translateList['#'] = "bANanAs";
+    translateList['$'] = "bANanaS";
+    translateList['%'] = "bANanas";
+    translateList['^'] = "bAnANAS";
+    translateList['&'] = "bAnANAs";
+    translateList['*'] = "bAnANaS";
+    translateList['('] = "bAnANas";
+    translateList[')'] = "bAnAnAS";
+    translateList['_'] = "bAnAnAs";
+    translateList['+'] = "bAnAnaS";
+    translateList['{'] = "bAnAnas";
+    translateList['}'] = "bAnaNAS";
+    translateList['|'] = "bAnaNAs";
+    translateList['\\'] = "bAnaNaS";
+    translateList[':'] = "bAnaNas";
+    translateList['"'] = "bAnanAS";
+    translateList['?'] = "bAnanAs";
+    translateList['>'] = "bAnanaS";
+    translateList['<'] = "bAnanas";
+
+    if (englishString.length() == 0)
+        return "";
+    istringstream englishStream(englishString);
+
+    string bananaString = "";
+    char englishChar = ' ';
+    while(englishStream >> englishChar)
+        bananaString += translateList[englishChar] + ' ';
+
+    bananaString.pop_back();
+    return bananaString;
+}
 
 
 int main(int argc, char* argv[])
@@ -199,174 +312,503 @@ int main(int argc, char* argv[])
     string sReg7 = "";
     string sReg8 = "";
 
+    //int regs
+    string iReg1 = "";
+    string iReg2 = "";
+    string iReg3 = "";
+    string iReg4 = "";
+    string iReg5 = "";
+    string iReg6 = "";
+    string iReg7 = "";
+    string iReg8 = "";
+
     // Interpreter Variables
     size_t lineNumber = 0;
 
     //while loop for the interpreter
     while (lineNumber < program.size())
     {
-        // if (==/!=/>/<)
-        if (program[lineNumber][0] == "banaNAS")
+        // make some pointers to strings that are commands
+        string* extendP = new string("bananAS");
+        string* ifP = new string("banaNAS");
+        string* writeP = new string("bananas");
+        string* readP = new string("bananaS");
+
+        if (program[lineNumber][0] == *extendP)
         {
-            //Evaluate expression, if not true skip the next line
-              //Expressions have the following format:
-                //if reg expression reg
+            // if (==/!=/>/<)
+            if (program[lineNumber][1] == *ifP)
+            {
+                //Evaluate expression, if not true skip the next line
+                  //Expressions have the following format:
+                    //if reg expression reg
 
-            //determine the registers
-            string* reg1 = nullptr;
-            string* reg2 = nullptr;
+                if (program[lineNumber][2] != *extendP)
+                    exit(0);
+                if (program[lineNumber][5] != *extendP)
+                    exit(0);
 
-            if (program[lineNumber][1] == "banANAS")
-            {
-                reg1 = &sReg1;
-            }
-            else if (program[lineNumber][1] == "banANAs")
-            {
-                reg1 = &sReg2;
-            }
-            else if (program[lineNumber][1] == "banANaS")
-            {
-                reg1 = &sReg3;
-            }
-            else if (program[lineNumber][1] == "banANas")
-            {
-                reg1 = &sReg4;
-            }
-            else if (program[lineNumber][1] == "banAnAS")
-            {
-                reg1 = &sReg5;
-            }
-            else if (program[lineNumber][1] == "banAnAs")
-            {
-                reg1 = &sReg6;
-            }
-            else if (program[lineNumber][1] == "banAnaS")
-            {
-                reg1 = &sReg7;
-            }
-            else if (program[lineNumber][1] == "banAnas")
-            {
-                reg1 = &sReg8;
-            }
+                //determine the registers
+                string* reg1 = nullptr;
+                string* reg2 = nullptr;
 
-            if (program[lineNumber][3] == "banANAS")
-            {
-                reg2 = &sReg1;
-            }
-            else if (program[lineNumber][3] == "banANAs")
-            {
-                reg2 = &sReg2;
-            }
-            else if (program[lineNumber][3] == "banANaS")
-            {
-                reg2 = &sReg3;
-            }
-            else if (program[lineNumber][3] == "banANas")
-            {
-                reg2 = &sReg4;
-            }
-            else if (program[lineNumber][3] == "banAnAS")
-            {
-                reg2 = &sReg5;
-            }
-            else if (program[lineNumber][3] == "banAnAs")
-            {
-                reg2 = &sReg6;
-            }
-            else if (program[lineNumber][3] == "banAnaS")
-            {
-                reg2 = &sReg7;
-            }
-            else if (program[lineNumber][3] == "banAnas")
-            {
-                reg2 = &sReg8;
-            }
-
-            bool result = false;
-
-            // determine the operator
-            if (program[lineNumber][2] == "baNANAS")
-            {
-                result = (*reg1 != *reg2);
-            }
-            else if (program[lineNumber][2] == "baNanaS")
-            {
-                result = (*reg1 == *reg2);
-            }
-            else if (program[lineNumber][2] == "baNANAs")
-            {
-                //convert strings to numbers to compare >/<
-                int64_t num1 = 0;
-                for (size_t i = 0; (i < 64) && (i < reg1->size()); ++i)
+                if (program[lineNumber][3] == "banANAS")
                 {
-                    if ((*reg1)[i] == 'B' || (*reg1)[i] == 'A' || (*reg1)[i] == 'N' || (*reg2)[i] == 'S')
-                    {
-                        num1 <<= 1;
-                    }
-                    else if ((*reg1)[i] == 'b' || (*reg1)[i] == 'a' || (*reg1)[i] == 'n' || (*reg2)[i] == 's')
-                    {
-                        num1 <<= 0;
-                    }
+                    reg1 = &iReg1;
+                }
+                else if (program[lineNumber][3] == "banANAs")
+                {
+                    reg1 = &iReg2;
+                }
+                else if (program[lineNumber][3] == "banANaS")
+                {
+                    reg1 = &iReg3;
+                }
+                else if (program[lineNumber][3] == "banANas")
+                {
+                    reg1 = &iReg4;
+                }
+                else if (program[lineNumber][3] == "banAnAS")
+                {
+                    reg1 = &iReg5;
+                }
+                else if (program[lineNumber][3] == "banAnAs")
+                {
+                    reg1 = &iReg6;
+                }
+                else if (program[lineNumber][3] == "banAnaS")
+                {
+                    reg1 = &iReg7;
+                }
+                else if (program[lineNumber][3] == "banAnas")
+                {
+                    reg1 = &iReg8;
                 }
 
-                int64_t num2 = 0;
-                for (size_t i = 0; (i < 64) && (i < reg2->size()); ++i)
+                if (program[lineNumber][6] == "banANAS")
                 {
-                    if ((*reg2)[i] == 'B' || (*reg2)[i] == 'A' || (*reg2)[i] == 'N' || (*reg2)[i] == 'S')
-                    {
-                        num1 <<= 1;
-                    }
-                    else if ((*reg2)[i] == 'b' || (*reg2)[i] == 'a' || (*reg2)[i] == 'n' || (*reg2)[i] == 's')
-                    {
-                        num1 <<= 0;
-                    }
+                    reg2 = &iReg1;
+                }
+                else if (program[lineNumber][6] == "banANAs")
+                {
+                    reg2 = &iReg2;
+                }
+                else if (program[lineNumber][6] == "banANaS")
+                {
+                    reg2 = &iReg3;
+                }
+                else if (program[lineNumber][6] == "banANas")
+                {
+                    reg2 = &iReg4;
+                }
+                else if (program[lineNumber][6] == "banAnAS")
+                {
+                    reg2 = &iReg5;
+                }
+                else if (program[lineNumber][6] == "banAnAs")
+                {
+                    reg2 = &iReg6;
+                }
+                else if (program[lineNumber][6] == "banAnaS")
+                {
+                    reg2 = &iReg7;
+                }
+                else if (program[lineNumber][6] == "banAnas")
+                {
+                    reg2 = &iReg8;
                 }
 
-                result = (num1 > num2);
+                bool result = false;
+
+                // determine the operator
+                if (program[lineNumber][4] == "baNANAS")
+                {
+                    result = (reg1->size() != reg2->size());
+                }
+                else if (program[lineNumber][4] == "baNanaS")
+                {
+                    result = (reg1->size() == reg2->size());
+                }
+
+                if (!result)
+                {
+                    lineNumber += 1;
+                }
+
             }
-            else if (program[lineNumber][2] == "baNANaS")
+
+            // int reg /=;*=;+=;-=;<<;>>:&=;|=;^=;=
+            else if (program[lineNumber][1][0] == 'b' && program[lineNumber][1][1] == 'a' && program[lineNumber][1][2] == 'n' && program[lineNumber][1][3] == 'A')
             {
-                //convert strings to numbers to compare >/<
-                int64_t num1 = 0;
-                for (size_t i = 0; (i < 64) && (i < reg1->size()); ++i)
+                //determine the register
+                string* reg = nullptr;
+
+                if (program[lineNumber][1] == "banANAS")
                 {
-                    if ((*reg1)[i] == 'B' || (*reg1)[i] == 'A' || (*reg1)[i] == 'N' || (*reg2)[i] == 'S')
-                    {
-                        num1 <<= 1;
-                    }
-                    else if ((*reg1)[i] == 'b' || (*reg1)[i] == 'a' || (*reg1)[i] == 'n' || (*reg2)[i] == 's')
-                    {
-                        num1 <<= 0;
-                    }
+                    reg = &iReg1;
+                }
+                else if (program[lineNumber][1] == "banANAs")
+                {
+                    reg = &iReg2;
+                }
+                else if (program[lineNumber][1] == "banANaS")
+                {
+                    reg = &iReg3;
+                }
+                else if (program[lineNumber][1] == "banANas")
+                {
+                    reg = &iReg4;
+                }
+                else if (program[lineNumber][1] == "banAnAS")
+                {
+                    reg = &iReg5;
+                }
+                else if (program[lineNumber][1] == "banAnAs")
+                {
+                    reg = &iReg6;
+                }
+                else if (program[lineNumber][1] == "banAnaS")
+                {
+                    reg = &iReg7;
+                }
+                else if (program[lineNumber][1] == "banAnas")
+                {
+                    reg = &iReg8;
                 }
 
-                int64_t num2 = 0;
-                for (size_t i = 0; (i < 64) && (i < reg2->size()); ++i)
+                //reassign
+                if (program[lineNumber][2] == "baNanas")
                 {
-                    if ((*reg2)[i] == 'B' || (*reg2)[i] == 'A' || (*reg2)[i] == 'N' || (*reg2)[i] == 'S')
+                    if (program[lineNumber][3] != "bananAS")
                     {
-                        num1 <<= 1;
+                        (*reg) = "";
+                        for (size_t i = 3; i < program[lineNumber].size(); ++i)
+                            (*reg) += program[lineNumber][i] + ' ';
+                        (*reg).pop_back();
                     }
-                    else if ((*reg2)[i] == 'b' || (*reg2)[i] == 'a' || (*reg2)[i] == 'n' || (*reg2)[i] == 's')
+                    else
                     {
-                        num1 <<= 0;
+                        //determine the register
+                        string* reg2 = nullptr;
+
+                        if (program[lineNumber][3] != "bananAS")
+                            exit(0);
+
+                        if (program[lineNumber][4] == "banANAS")
+                        {
+                            reg2 = &iReg1;
+                        }
+                        else if (program[lineNumber][4] == "banANAs")
+                        {
+                            reg2 = &iReg2;
+                        }
+                        else if (program[lineNumber][4] == "banANaS")
+                        {
+                            reg2 = &iReg3;
+                        }
+                        else if (program[lineNumber][4] == "banANas")
+                        {
+                            reg2 = &iReg4;
+                        }
+                        else if (program[lineNumber][4] == "banAnAS")
+                        {
+                            reg2 = &iReg5;
+                        }
+                        else if (program[lineNumber][4] == "banAnAs")
+                        {
+                            reg2 = &iReg6;
+                        }
+                        else if (program[lineNumber][4] == "banAnaS")
+                        {
+                            reg2 = &iReg7;
+                        }
+                        else if (program[lineNumber][4] == "banAnas")
+                        {
+                            reg2 = &iReg8;
+                        }
+
+                        (*reg) = (*reg2);
                     }
                 }
+                else
+                {
+                    if (program[lineNumber][3] != "bananAS")
+                        exit(0);
 
-                result = (num1 < num2);
+                    //determine the register
+                    string* reg2 = nullptr;
+
+                    if (program[lineNumber][4] == "banANAS")
+                    {
+                        reg2 = &iReg1;
+                    }
+                    else if (program[lineNumber][4] == "banANAs")
+                    {
+                        reg2 = &iReg2;
+                    }
+                    else if (program[lineNumber][4] == "banANaS")
+                    {
+                        reg2 = &iReg3;
+                    }
+                    else if (program[lineNumber][4] == "banANas")
+                    {
+                        reg2 = &iReg4;
+                    }
+                    else if (program[lineNumber][4] == "banAnAS")
+                    {
+                        reg2 = &iReg5;
+                    }
+                    else if (program[lineNumber][4] == "banAnAs")
+                    {
+                        reg2 = &iReg6;
+                    }
+                    else if (program[lineNumber][4] == "banAnaS")
+                    {
+                        reg2 = &iReg7;
+                    }
+                    else if (program[lineNumber][4] == "banAnas")
+                    {
+                        reg2 = &iReg8;
+                    }
+
+                    /*if (program[lineNumber][1] == "baNAnAS")
+                    {
+                        (*reg) /=
+                    }
+                    else if (program[lineNumber][1] == "baNAnAs")
+                    {
+                        (*reg) *=
+                    }
+                    else*/ if (program[lineNumber][2] == "baNAnas")
+                    {
+                        if ((*reg2)[0] == 'b' && (*reg2)[1] == 'A' && (*reg2)[2] == 'N' && (*reg2)[3] == 'a' && (*reg2)[4] == 'N' && (*reg2)[5] == 'A' && (*reg2)[6] == 'S')
+                        {
+                            (*reg) = "bANaNAS" + (*reg);
+                            for (size_t i = 8; i < reg2->size(); ++i)
+                                (*reg) += (*reg2)[i];
+                        }
+                        else
+                            (*reg) += " " + *reg2;
+                    }/*
+                    else if (program[lineNumber][1] == "baNAnaS")
+                    {
+                        (*reg) -=
+                    }*/
+
+                }
             }
-
-            if (!result)
-            {
-                lineNumber += 2;
-            }
-
         }
-
-        // write
-        if (program[lineNumber][0] == "bananas")
+        else
         {
-            if (program[lineNumber][1][0] == 'b' && program[lineNumber][1][1] == 'a' && program[lineNumber][1][2] == 'n' && program[lineNumber][1][3] == 'A')
+            // if (==/!=/>/<)
+            if (program[lineNumber][0] == *ifP)
+            {
+                //Evaluate expression, if not true skip the next line
+                  //Expressions have the following format:
+                    //if reg expression reg
+
+                //determine the registers
+                string* reg1 = nullptr;
+                string* reg2 = nullptr;
+
+                if (program[lineNumber][1] == "banANAS")
+                {
+                    reg1 = &sReg1;
+                }
+                else if (program[lineNumber][1] == "banANAs")
+                {
+                    reg1 = &sReg2;
+                }
+                else if (program[lineNumber][1] == "banANaS")
+                {
+                    reg1 = &sReg3;
+                }
+                else if (program[lineNumber][1] == "banANas")
+                {
+                    reg1 = &sReg4;
+                }
+                else if (program[lineNumber][1] == "banAnAS")
+                {
+                    reg1 = &sReg5;
+                }
+                else if (program[lineNumber][1] == "banAnAs")
+                {
+                    reg1 = &sReg6;
+                }
+                else if (program[lineNumber][1] == "banAnaS")
+                {
+                    reg1 = &sReg7;
+                }
+                else if (program[lineNumber][1] == "banAnas")
+                {
+                    reg1 = &sReg8;
+                }
+
+                if (program[lineNumber][3] == "banANAS")
+                {
+                    reg2 = &sReg1;
+                }
+                else if (program[lineNumber][3] == "banANAs")
+                {
+                    reg2 = &sReg2;
+                }
+                else if (program[lineNumber][3] == "banANaS")
+                {
+                    reg2 = &sReg3;
+                }
+                else if (program[lineNumber][3] == "banANas")
+                {
+                    reg2 = &sReg4;
+                }
+                else if (program[lineNumber][3] == "banAnAS")
+                {
+                    reg2 = &sReg5;
+                }
+                else if (program[lineNumber][3] == "banAnAs")
+                {
+                    reg2 = &sReg6;
+                }
+                else if (program[lineNumber][3] == "banAnaS")
+                {
+                    reg2 = &sReg7;
+                }
+                else if (program[lineNumber][3] == "banAnas")
+                {
+                    reg2 = &sReg8;
+                }
+
+                bool result = false;
+
+                // determine the operator
+                if (program[lineNumber][2] == "baNANAS")
+                {
+                    result = (*reg1 != *reg2);
+                }
+                else if (program[lineNumber][2] == "baNanaS")
+                {
+                    result = (*reg1 == *reg2);
+                }
+                else if (program[lineNumber][2] == "baNANAs")
+                {
+                    //convert strings to numbers to compare >/<
+                    int64_t num1 = 0;
+                    for (size_t i = 0; (i < 64) && (i < reg1->size()); ++i)
+                    {
+                        if ((*reg1)[i] == 'B' || (*reg1)[i] == 'A' || (*reg1)[i] == 'N' || (*reg2)[i] == 'S')
+                        {
+                            num1 <<= 1;
+                        }
+                        else if ((*reg1)[i] == 'b' || (*reg1)[i] == 'a' || (*reg1)[i] == 'n' || (*reg2)[i] == 's')
+                        {
+                            num1 <<= 0;
+                        }
+                    }
+
+                    int64_t num2 = 0;
+                    for (size_t i = 0; (i < 64) && (i < reg2->size()); ++i)
+                    {
+                        if ((*reg2)[i] == 'B' || (*reg2)[i] == 'A' || (*reg2)[i] == 'N' || (*reg2)[i] == 'S')
+                        {
+                            num1 <<= 1;
+                        }
+                        else if ((*reg2)[i] == 'b' || (*reg2)[i] == 'a' || (*reg2)[i] == 'n' || (*reg2)[i] == 's')
+                        {
+                            num1 <<= 0;
+                        }
+                    }
+
+                    result = (num1 > num2);
+                }
+                else if (program[lineNumber][2] == "baNANaS")
+                {
+                    //convert strings to numbers to compare >/<
+                    int64_t num1 = 0;
+                    for (size_t i = 0; (i < 64) && (i < reg1->size()); ++i)
+                    {
+                        if ((*reg1)[i] == 'B' || (*reg1)[i] == 'A' || (*reg1)[i] == 'N' || (*reg2)[i] == 'S')
+                        {
+                            num1 <<= 1;
+                        }
+                        else if ((*reg1)[i] == 'b' || (*reg1)[i] == 'a' || (*reg1)[i] == 'n' || (*reg2)[i] == 's')
+                        {
+                            num1 <<= 0;
+                        }
+                    }
+
+                    int64_t num2 = 0;
+                    for (size_t i = 0; (i < 64) && (i < reg2->size()); ++i)
+                    {
+                        if ((*reg2)[i] == 'B' || (*reg2)[i] == 'A' || (*reg2)[i] == 'N' || (*reg2)[i] == 'S')
+                        {
+                            num1 <<= 1;
+                        }
+                        else if ((*reg2)[i] == 'b' || (*reg2)[i] == 'a' || (*reg2)[i] == 'n' || (*reg2)[i] == 's')
+                        {
+                            num1 <<= 0;
+                        }
+                    }
+
+                    result = (num1 < num2);
+                }
+
+                if (!result)
+                {
+                    lineNumber += 1;
+                }
+
+            }
+
+            // write
+            else if (program[lineNumber][0] == *writeP)
+            {
+                if (program[lineNumber][1][0] == 'b' && program[lineNumber][1][1] == 'a' && program[lineNumber][1][2] == 'n' && program[lineNumber][1][3] == 'A')
+                {
+                    //determine the register
+                    string* reg = nullptr;
+
+                    if (program[lineNumber][1] == "banANAS")
+                    {
+                        reg = &sReg1;
+                    }
+                    else if (program[lineNumber][1] == "banANAs")
+                    {
+                        reg = &sReg2;
+                    }
+                    else if (program[lineNumber][1] == "banANaS")
+                    {
+                        reg = &sReg3;
+                    }
+                    else if (program[lineNumber][1] == "banANas")
+                    {
+                        reg = &sReg4;
+                    }
+                    else if (program[lineNumber][1] == "banAnAS")
+                    {
+                        reg = &sReg5;
+                    }
+                    else if (program[lineNumber][1] == "banAnAs")
+                    {
+                        reg = &sReg6;
+                    }
+                    else if (program[lineNumber][1] == "banAnaS")
+                    {
+                        reg = &sReg7;
+                    }
+                    else if (program[lineNumber][1] == "banAnas")
+                    {
+                        reg = &sReg8;
+                    }
+
+                    cout << bs2e(*reg, translateList) << endl;
+                }
+                else
+                {
+                    cout << bs2e(program[lineNumber], 1, translateList) << endl;
+                }
+            }
+
+            // read
+            else if (program[lineNumber][0] == *readP)
             {
                 //determine the register
                 string* reg = nullptr;
@@ -404,142 +846,94 @@ int main(int argc, char* argv[])
                     reg = &sReg8;
                 }
 
-                cout << bs2e(*reg, translateList) << endl;
-            }
-            else
-            {
-                cout << bs2e(program[lineNumber], 1, translateList) << endl;
-            }
-        }
+                getline(cin, *reg);
 
-        // read
-        else if (program[lineNumber][0] == "bananaS")
-        {
-            //determine the register
-            string* reg = nullptr;
-
-            if (program[lineNumber][1] == "banANAS")
-            {
-                reg = &sReg1;
-            }
-            else if (program[lineNumber][1] == "banANAs")
-            {
-                reg = &sReg2;
-            }
-            else if (program[lineNumber][1] == "banANaS")
-            {
-                reg = &sReg3;
-            }
-            else if (program[lineNumber][1] == "banANas")
-            {
-                reg = &sReg4;
-            }
-            else if (program[lineNumber][1] == "banAnAS")
-            {
-                reg = &sReg5;
-            }
-            else if (program[lineNumber][1] == "banAnAs")
-            {
-                reg = &sReg6;
-            }
-            else if (program[lineNumber][1] == "banAnaS")
-            {
-                reg = &sReg7;
-            }
-            else if (program[lineNumber][1] == "banAnas")
-            {
-                reg = &sReg8;
+                *reg = e2bs(*reg);
             }
 
-            getline(cin, *reg);
+            // reg /=;*=;+=;-=;<<;>>:&=;|=;^=;=
+            else if (program[lineNumber][0][0] == 'b' && program[lineNumber][0][1] == 'a' && program[lineNumber][0][2] == 'n' && program[lineNumber][0][3] == 'A')
+            {
+                //determine the register
+                string* reg = nullptr;
 
-            // string raw;
-            // cin >> raw;
-            // (*reg) = e2bs(raw);
-        }
-
-        // reg /=;*=;+=;-=;<<;>>:&=;|=;^=;=
-        else if (program[lineNumber][0][0] == 'b' && program[lineNumber][0][1] == 'a' && program[lineNumber][0][2] == 'n' && program[lineNumber][0][3] == 'A')
-        {
-            //determine the register
-            string* reg = nullptr;
-
-            if (program[lineNumber][0] == "banANAS")
-            {
-                reg = &sReg1;
-            }
-            else if (program[lineNumber][0] == "banANAs")
-            {
-                reg = &sReg2;
-            }
-            else if (program[lineNumber][0] == "banANaS")
-            {
-                reg = &sReg3;
-            }
-            else if (program[lineNumber][0] == "banANas")
-            {
-                reg = &sReg4;
-            }
-            else if (program[lineNumber][0] == "banAnAS")
-            {
-                reg = &sReg5;
-            }
-            else if (program[lineNumber][0] == "banAnAs")
-            {
-                reg = &sReg6;
-            }
-            else if (program[lineNumber][0] == "banAnaS")
-            {
-                reg = &sReg7;
-            }
-            else if (program[lineNumber][0] == "banAnas")
-            {
-                reg = &sReg8;
-            }
+                if (program[lineNumber][0] == "banANAS")
+                {
+                    reg = &sReg1;
+                }
+                else if (program[lineNumber][0] == "banANAs")
+                {
+                    reg = &sReg2;
+                }
+                else if (program[lineNumber][0] == "banANaS")
+                {
+                    reg = &sReg3;
+                }
+                else if (program[lineNumber][0] == "banANas")
+                {
+                    reg = &sReg4;
+                }
+                else if (program[lineNumber][0] == "banAnAS")
+                {
+                    reg = &sReg5;
+                }
+                else if (program[lineNumber][0] == "banAnAs")
+                {
+                    reg = &sReg6;
+                }
+                else if (program[lineNumber][0] == "banAnaS")
+                {
+                    reg = &sReg7;
+                }
+                else if (program[lineNumber][0] == "banAnas")
+                {
+                    reg = &sReg8;
+                }
 
 
-            /*if (program[lineNumber][1] == "baNAnAS")
-            {
-                (*reg) /=
-            }
-            else if (program[lineNumber][1] == "baNAnAs")
-            {
-                (*reg) *=
-            }
-            else if (program[lineNumber][1] == "baNAnas")
-            {
-                (*reg) +=
-            }
-            else if (program[lineNumber][1] == "baNAnaS")
-            {
-                (*reg) -=
-            }
-            else if (program[lineNumber][1] == "baNaNAs")
-            {
-                (*reg) <<=
-            }
-            else if (program[lineNumber][1] == "baNaNAS")
-            {
-                (*reg) >>=
-            }
-            else if (program[lineNumber][1] == "baNaNaS")
-            {
-                (*reg) &=
-            }
-            else if (program[lineNumber][1] == "baNaNas")
-            {
-                (*reg) |=
-            }
-            else if (program[lineNumber][1] == "baNanAS")
-            {
-                (*reg) ^=
-            }
-            else*/ if (program[lineNumber][1] == "baNanas")
-            {
-                (*reg) = "";
-                for (size_t i = 2; i < program[lineNumber].size(); ++i)
-                    (*reg) += program[lineNumber][i] + " ";//bs2e(program[lineNumber], 2, translateList);
-                (*reg).pop_back();
+                /*if (program[lineNumber][1] == "baNAnAS")
+                {
+                    (*reg) /=
+                }
+                else if (program[lineNumber][1] == "baNAnAs")
+                {
+                    (*reg) *=
+                }
+                else if (program[lineNumber][1] == "baNAnas")
+                {
+                    (*reg) +=
+                }
+                else if (program[lineNumber][1] == "baNAnaS")
+                {
+                    (*reg) -=
+                }
+                else if (program[lineNumber][1] == "baNaNAs")
+                {
+                    (*reg) <<=
+                }
+                else if (program[lineNumber][1] == "baNaNAS")
+                {
+                    (*reg) >>=
+                }
+                else if (program[lineNumber][1] == "baNaNaS")
+                {
+                    (*reg) &=
+                }
+                else if (program[lineNumber][1] == "baNaNas")
+                {
+                    (*reg) |=
+                }
+                else if (program[lineNumber][1] == "baNanAS")
+                {
+                    (*reg) ^=
+                }
+                else*/ if (program[lineNumber][1] == "baNanas")
+                {
+                    (*reg) = "";
+                    for (size_t i = 2; i < program[lineNumber].size(); ++i)
+                        (*reg) += program[lineNumber][i] + " ";//bs2e(program[lineNumber], 2, translateList);
+                    (*reg).pop_back();
+                }
             }
         }
 
