@@ -162,6 +162,7 @@ string bs2e(const string& bananaString, map<string, char>& translateList)
 {
     if (bananaString.length() == 0)
         return "";
+
     istringstream bananaStream(bananaString);
 
     string convertedString = "";
@@ -597,6 +598,227 @@ int main(int argc, char* argv[])
 
                 }
             }
+
+            // write
+            else if (program[lineNumber][1] == *writeP)
+            {
+                //ExtendedWrite
+                extendedWrite:
+
+                if (program[lineNumber][1] == *extendP)
+                {
+                    if (program[lineNumber][2][0] == 'b' && program[lineNumber][2][1] == 'a' && program[lineNumber][2][2] == 'n' && program[lineNumber][2][3] == 'A')
+                    {
+                        //determine the register
+                        string* reg = nullptr;
+
+                        if (program[lineNumber][2] == "banANAS")
+                        {
+                            reg = &iReg1;
+                        }
+                        else if (program[lineNumber][2] == "banANAs")
+                        {
+                            reg = &iReg2;
+                        }
+                        else if (program[lineNumber][2] == "banANaS")
+                        {
+                            reg = &iReg3;
+                        }
+                        else if (program[lineNumber][2] == "banANas")
+                        {
+                            reg = &iReg4;
+                        }
+                        else if (program[lineNumber][2] == "banAnAS")
+                        {
+                            reg = &iReg5;
+                        }
+                        else if (program[lineNumber][2] == "banAnAs")
+                        {
+                            reg = &iReg6;
+                        }
+                        else if (program[lineNumber][2] == "banAnaS")
+                        {
+                            reg = &iReg7;
+                        }
+                        else if (program[lineNumber][2] == "banAnas")
+                        {
+                            reg = &iReg8;
+                        }
+                        else
+                        {
+                            exit(0);
+                        }
+
+                        cout << bs2e(*reg, translateList) << endl;
+                    }
+                }
+                else if(program[lineNumber][2] == *extendP)
+                {
+                    if (program[lineNumber][3][0] == 'b' && program[lineNumber][3][1] == 'a' && program[lineNumber][3][2] == 'n' && program[lineNumber][3][3] == 'A')
+                    {
+                        //determine the register
+                        string* reg = nullptr;
+
+                        if (program[lineNumber][3] == "banANAS")
+                        {
+                            reg = &iReg1;
+                        }
+                        else if (program[lineNumber][3] == "banANAs")
+                        {
+                            reg = &iReg2;
+                        }
+                        else if (program[lineNumber][3] == "banANaS")
+                        {
+                            reg = &iReg3;
+                        }
+                        else if (program[lineNumber][3] == "banANas")
+                        {
+                            reg = &iReg4;
+                        }
+                        else if (program[lineNumber][3] == "banAnAS")
+                        {
+                            reg = &iReg5;
+                        }
+                        else if (program[lineNumber][3] == "banAnAs")
+                        {
+                            reg = &iReg6;
+                        }
+                        else if (program[lineNumber][3] == "banAnaS")
+                        {
+                            reg = &iReg7;
+                        }
+                        else if (program[lineNumber][3] == "banAnas")
+                        {
+                            reg = &iReg8;
+                        }
+
+                        cout << bs2e(*reg, translateList) << endl;
+                    }
+                }
+                else
+                {
+                    cout << bs2e(program[lineNumber], 3, translateList) << endl;
+                }
+            }
+
+            // read
+            else if (program[lineNumber][1] == *readP)
+            {
+                //ExtendedWrite
+                extendedRead:
+
+                if (program[lineNumber][1] == *extendP)
+                {
+                    if (program[lineNumber][2][0] == 'b' && program[lineNumber][2][1] == 'a' && program[lineNumber][2][2] == 'n' && program[lineNumber][2][3] == 'A')
+                    {
+                        //determine the register
+                        string* reg = nullptr;
+
+                        if (program[lineNumber][2] == "banANAS")
+                        {
+                            reg = &iReg1;
+                        }
+                        else if (program[lineNumber][2] == "banANAs")
+                        {
+                            reg = &iReg2;
+                        }
+                        else if (program[lineNumber][2] == "banANaS")
+                        {
+                            reg = &iReg3;
+                        }
+                        else if (program[lineNumber][2] == "banANas")
+                        {
+                            reg = &iReg4;
+                        }
+                        else if (program[lineNumber][2] == "banAnAS")
+                        {
+                            reg = &iReg5;
+                        }
+                        else if (program[lineNumber][2] == "banAnAs")
+                        {
+                            reg = &iReg6;
+                        }
+                        else if (program[lineNumber][2] == "banAnaS")
+                        {
+                            reg = &iReg7;
+                        }
+                        else if (program[lineNumber][2] == "banAnas")
+                        {
+                            reg = &iReg8;
+                        }
+                        else
+                        {
+                            exit(0);
+                        }
+
+                        getline(cin, *reg);
+
+                        *reg = e2bs(*reg);
+                    }
+                    else
+                    {
+                        exit(0);
+                    }
+                }
+                else if(program[lineNumber][2] == *extendP)
+                {
+                    if (program[lineNumber][3][0] == 'b' && program[lineNumber][3][1] == 'a' && program[lineNumber][3][2] == 'n' && program[lineNumber][3][3] == 'A')
+                    {
+                        //determine the register
+                        string* reg = nullptr;
+
+                        if (program[lineNumber][3] == "banANAS")
+                        {
+                            reg = &iReg1;
+                        }
+                        else if (program[lineNumber][3] == "banANAs")
+                        {
+                            reg = &iReg2;
+                        }
+                        else if (program[lineNumber][3] == "banANaS")
+                        {
+                            reg = &iReg3;
+                        }
+                        else if (program[lineNumber][3] == "banANas")
+                        {
+                            reg = &iReg4;
+                        }
+                        else if (program[lineNumber][3] == "banAnAS")
+                        {
+                            reg = &iReg5;
+                        }
+                        else if (program[lineNumber][3] == "banAnAs")
+                        {
+                            reg = &iReg6;
+                        }
+                        else if (program[lineNumber][3] == "banAnaS")
+                        {
+                            reg = &iReg7;
+                        }
+                        else if (program[lineNumber][3] == "banAnas")
+                        {
+                            reg = &iReg8;
+                        }
+                        else
+                        {
+                            exit(0);
+                        }
+
+                        getline(cin, *reg);
+
+                        *reg = e2bs(*reg);
+                    }
+                    else
+                    {
+                        exit(0);
+                    }
+                }
+                else
+                {
+                    exit(0);
+                }
+
+            }
         }
         else
         {
@@ -801,6 +1023,10 @@ int main(int argc, char* argv[])
 
                     cout << bs2e(*reg, translateList) << endl;
                 }
+                else if (program[lineNumber][1] == "bananAS")
+                {
+                    goto extendedWrite;
+                }
                 else
                 {
                     cout << bs2e(program[lineNumber], 1, translateList) << endl;
@@ -844,6 +1070,10 @@ int main(int argc, char* argv[])
                 else if (program[lineNumber][1] == "banAnas")
                 {
                     reg = &sReg8;
+                }
+                else if (program[lineNumber][1] == "bananAS")
+                {
+                    goto extendedRead;
                 }
 
                 getline(cin, *reg);
