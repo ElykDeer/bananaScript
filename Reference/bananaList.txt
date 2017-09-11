@@ -232,7 +232,7 @@ banaNaS while
 banaNas for
 
 bananAS extend
-bananAs goto #forward
+bananAs jump #forward
 
 bananaS read
 bananas write
