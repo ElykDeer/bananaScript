@@ -287,6 +287,66 @@ string e2bs(const string& englishString)
     return bananaString;
 }
 
+int64_t bs2int(const string* const reg, map<string, char>& translateList)
+{
+    //translate bananaStream internal representation into a number
+    istringstream numberThing(bs2e(*reg, translateList));
+    int number;
+    numberThing >> number;
+
+    return number;
+}
+
+string int2bs(int64_t theInt)
+{
+
+    string bananaScript = "";
+    int place = 0;
+    while (theInt)
+    {
+        string bananaWord = "";
+        //Lowercase
+        if (theInt%2 == 0)
+        {
+            if (place == 1 || place == 3 || place == 5)
+                bananaWord = "a" + bananaWord;
+            else if (place == 2 || place == 4)
+                bananaWord = "n" + bananaWord;
+            else if (place == 0)
+                bananaWord = "s" + bananaWord;
+            else if (place == 6)
+                bananaWord = "b" + bananaWord;
+        }
+        else //uppercase
+        {
+            if (place == 1 || place == 3 || place == 5)
+                bananaWord = "A" + bananaWord;
+            else if (place == 2 || place == 4)
+                bananaWord = "N" + bananaWord;
+            else if (place == 0)
+                bananaWord = "S" + bananaWord;
+            else if (place == 6)
+                bananaWord = "B" + bananaWord;
+        }
+
+        if (bananaWord.size() == 7)
+        {
+            if (bananaScript.size())
+                bananaScript = bananaWord + " " + bananaScript;
+            else
+                bananaScript = bananaWord;
+
+            bananaWord = "";
+
+            place = 0;
+        }
+
+        ++place;
+        theInt /= 2;
+    }
+    return "";
+}
+
 
 int main(int argc, char* argv[])
 {
@@ -977,7 +1037,6 @@ int main(int argc, char* argv[])
                 {
                     lineNumber += 1;
                 }
-
             }
 
             // write
@@ -1120,52 +1179,94 @@ int main(int argc, char* argv[])
                     reg = &sReg8;
                 }
 
+                if (program[lineNumber][2][0] == 'b' && program[lineNumber][2][1] == 'a' && program[lineNumber][2][2] == 'n' && program[lineNumber][2][3] == 'A')
+                {
+                    string* reg2 = nullptr;
 
-                /*if (program[lineNumber][1] == "baNAnAS")
-                {
-                    (*reg) /=
+                    if (program[lineNumber][2] == "banANAS")
+                    {
+                        reg2 = &sReg1;
+                    }
+                    else if (program[lineNumber][2] == "banANAs")
+                    {
+                        reg2 = &sReg2;
+                    }
+                    else if (program[lineNumber][2] == "banANaS")
+                    {
+                        reg2 = &sReg3;
+                    }
+                    else if (program[lineNumber][2] == "banANas")
+                    {
+                        reg2 = &sReg4;
+                    }
+                    else if (program[lineNumber][2] == "banAnAS")
+                    {
+                        reg2 = &sReg5;
+                    }
+                    else if (program[lineNumber][2] == "banAnAs")
+                    {
+                        reg2 = &sReg6;
+                    }
+                    else if (program[lineNumber][2] == "banAnaS")
+                    {
+                        reg2 = &sReg7;
+                    }
+                    else if (program[lineNumber][2] == "banAnas")
+                    {
+                        reg2 = &sReg8;
+                    }
+
+                    if (program[lineNumber][1] == "baNAnAS")
+                    {
+                        *reg = int2bs(bs2int(reg, translateList) / bs2int(reg2, translateList));
+                    }
+                    else if (program[lineNumber][1] == "baNAnAs")
+                    {
+                        *reg = int2bs(bs2int(reg, translateList) * bs2int(reg2, translateList));
+                    }
+                    else if (program[lineNumber][1] == "baNAnas")
+                    {
+                        *reg = int2bs(bs2int(reg, translateList) + bs2int(reg2, translateList));
+                    }
+                    else if (program[lineNumber][1] == "baNAnaS")
+                    {
+                        *reg = int2bs(bs2int(reg, translateList) - bs2int(reg2, translateList));
+                    }
+                    else if (program[lineNumber][1] == "baNaNAs")
+                    {
+                        *reg = int2bs(bs2int(reg, translateList) << bs2int(reg2, translateList));
+                    }
+                    else if (program[lineNumber][1] == "baNaNAS")
+                    {
+                        *reg = int2bs(bs2int(reg, translateList) >> bs2int(reg2, translateList));
+                    }
+                    else if (program[lineNumber][1] == "baNaNaS")
+                    {
+                        *reg = int2bs(bs2int(reg, translateList) & bs2int(reg2, translateList));
+                    }
+                    else if (program[lineNumber][1] == "baNaNas")
+                    {
+                        *reg = int2bs(bs2int(reg, translateList) | bs2int(reg2, translateList));
+                    }
+                    else if (program[lineNumber][1] == "baNanAS")
+                    {
+                        *reg = int2bs(bs2int(reg, translateList) ^ bs2int(reg2, translateList));
+                    }
                 }
-                else if (program[lineNumber][1] == "baNAnAs")
+                else
                 {
-                    (*reg) *=
-                }
-                else if (program[lineNumber][1] == "baNAnas")
-                {
-                    (*reg) +=
-                }
-                else if (program[lineNumber][1] == "baNAnaS")
-                {
-                    (*reg) -=
-                }
-                else if (program[lineNumber][1] == "baNaNAs")
-                {
-                    (*reg) <<=
-                }
-                else if (program[lineNumber][1] == "baNaNAS")
-                {
-                    (*reg) >>=
-                }
-                else if (program[lineNumber][1] == "baNaNaS")
-                {
-                    (*reg) &=
-                }
-                else if (program[lineNumber][1] == "baNaNas")
-                {
-                    (*reg) |=
-                }
-                else if (program[lineNumber][1] == "baNanAS")
-                {
-                    (*reg) ^=
-                }
-                else*/ if (program[lineNumber][1] == "baNanas")
-                {
-                    (*reg) = "";
-                    for (size_t i = 2; i < program[lineNumber].size(); ++i)
-                        (*reg) += program[lineNumber][i] + " ";//bs2e(program[lineNumber], 2, translateList);
-                    (*reg).pop_back();
+                    //re assign
+                    if (program[lineNumber][1] == "baNanas")
+                    {
+                        (*reg) = "";
+                        for (size_t i = 2; i < program[lineNumber].size(); ++i)
+                            (*reg) += program[lineNumber][i] + " ";//bs2e(program[lineNumber], 2, translateList);
+                        (*reg).pop_back();
+                    }
                 }
             }
 
+            //jump
             else if (program[lineNumber][0] == "bananAs")
             {
                 if (program[lineNumber][1] != *extendP)
