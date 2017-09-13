@@ -120,7 +120,7 @@ vector<vector<string>> getScript(const string& filename)
     // open the file
     ifstream file(filename);
     if (!file)
-        std::exit(0);
+        std::exit(1);
 
     // build file
     string line = "";
@@ -287,26 +287,45 @@ string e2bs(const string& englishString)
     return bananaString;
 }
 
-int64_t bs2int(const string* const reg, map<string, char>& translateList)
+string bs2int(const string* const reg, map<string, char>& translateList)
 {
     //translate bananaStream internal representation into a number
-    istringstream numberThing(bs2e(*reg, translateList));
-    int number;
-    numberThing >> number;
+    string numberThing = (bs2e(*reg, translateList));
+/*
+    for (size_t i = 0; i < numberThing.length(); ++i)
+    {
+        if ((*reg1)[i] == 'B' || (*reg1)[i] == 'A' || (*reg1)[i] == 'N' || (*reg2)[i] == 'S')
+        {
+            num1 <<= 1;
+        }
+        else if ((*reg1)[i] == 'b' || (*reg1)[i] == 'a' || (*reg1)[i] == 'n' || (*reg2)[i] == 's')
+        {
+            num1 <<= 0;
+        }
+    }*/
 
-    return number;
+    string returnValue = "";
+/*
+    while (number)
+    {
+        if (number%2 == 0)
+
+    }
+
+    return number;*/
+
+    return returnValue;
 }
 
-string int2bs(int64_t theInt)
+string int2bs(string theInt)
 {
-
     string bananaScript = "";
     int place = 0;
-    while (theInt)
+    while (theInt.length())
     {
         string bananaWord = "";
         //Lowercase
-        if (theInt%2 == 0)
+        if (theInt[theInt.length()-1] == '0')
         {
             if (place == 1 || place == 3 || place == 5)
                 bananaWord = "a" + bananaWord;
@@ -331,6 +350,8 @@ string int2bs(int64_t theInt)
 
         if (bananaWord.size() == 7)
         {
+            cout << bananaWord << endl;
+
             if (bananaScript.size())
                 bananaScript = bananaWord + " " + bananaScript;
             else
@@ -341,10 +362,11 @@ string int2bs(int64_t theInt)
             place = 0;
         }
 
+        theInt.pop_back();
         ++place;
-        theInt /= 2;
     }
-    return "";
+
+    return bananaScript;
 }
 
 
@@ -357,7 +379,7 @@ int main(int argc, char* argv[])
     else
     {
         cout << "usage: monkeyDo [script]\n";
-        exit(0);
+        exit(1);
     }
 
     //Define the character conversion
@@ -405,9 +427,9 @@ int main(int argc, char* argv[])
                     //if reg expression reg
 
                 if (program[lineNumber][2] != *extendP)
-                    exit(0);
+                    exit(1);
                 if (program[lineNumber][5] != *extendP)
-                    exit(0);
+                    exit(1);
 
                 //determine the registers
                 string* reg1 = nullptr;
@@ -553,7 +575,7 @@ int main(int argc, char* argv[])
                         string* reg2 = nullptr;
 
                         if (program[lineNumber][3] != "bananAS")
-                            exit(0);
+                            exit(1);
 
                         if (program[lineNumber][4] == "banANAS")
                         {
@@ -594,7 +616,7 @@ int main(int argc, char* argv[])
                 else
                 {
                     if (program[lineNumber][3] != "bananAS")
-                        exit(0);
+                        exit(1);
 
                     //determine the register
                     string* reg2 = nullptr;
@@ -631,16 +653,48 @@ int main(int argc, char* argv[])
                     {
                         reg2 = &iReg8;
                     }
+                    else
+                    {
+                        exit(1);
+                    }
 
-                    /*if (program[lineNumber][1] == "baNAnAS")
+                    if (program[lineNumber][2] == "baNAnAS") // int divide
                     {
-                        (*reg) /=
+                        if ((*reg2).length() > 9)
+                        {
+                            exit(1);
+                        }
+
+                        istringstream stringStream((*reg));
+
+                        string word = "";
+                        string newReg = "";
+                        while (stringStream >> word)
+                            if (word != (*reg2))
+                                newReg += word + " ";
+
+                        newReg.pop_back();
+
+                        (*reg) = newReg;
                     }
-                    else if (program[lineNumber][1] == "baNAnAs")
+                    else if (program[lineNumber][2] == "baNAnAs") // int *
                     {
-                        (*reg) *=
+                        //translate bananaStream internal representation into a number
+                        istringstream numberThing(bs2e(*reg2, translateList));
+                        unsigned int repeatNumber;
+                        numberThing >> repeatNumber;
+
+                        if (repeatNumber == 0)
+                            (*reg) = "";
+                        else
+                        {
+                            string toRepeat = *reg;
+
+                            for (int64_t i = 1; i < repeatNumber; ++i)
+                                (*reg) += " " + toRepeat;
+                        }
                     }
-                    else*/ if (program[lineNumber][2] == "baNAnas")
+                    else if (program[lineNumber][2] == "baNAnas") // int +
                     {
                         if ((*reg2)[0] == 'b' && (*reg2)[1] == 'A' && (*reg2)[2] == 'N' && (*reg2)[3] == 'a' && (*reg2)[4] == 'N' && (*reg2)[5] == 'A' && (*reg2)[6] == 'S')
                         {
@@ -650,12 +704,34 @@ int main(int argc, char* argv[])
                         }
                         else
                             (*reg) += " " + *reg2;
-                    }/*
-                    else if (program[lineNumber][1] == "baNAnaS")
+                    }
+                    else if (program[lineNumber][2] == "baNAnaS") // int -
                     {
-                        (*reg) -=
-                    }*/
+                        if ((*reg2).length() > 9)
+                        {
+                            exit(1);
+                        }
 
+                        istringstream stringStream((*reg));
+
+                        string word = "";
+                        string newReg = "";
+                        bool notBefore = true;
+                        while (stringStream >> word)
+                        {
+                            if (notBefore && word == (*reg2))
+                                notBefore = false;
+                            else
+                                newReg += word + " ";
+                        }
+
+                        if (notBefore)
+                            newReg = "bANaNAS " + newReg + (*reg2);
+                        else
+                            newReg.pop_back();
+
+                        (*reg) = newReg;
+                    }
                 }
             }
 
@@ -706,7 +782,7 @@ int main(int argc, char* argv[])
                         }
                         else
                         {
-                            exit(0);
+                            exit(1);
                         }
 
                         cout << bs2e(*reg, translateList) << endl;
@@ -808,7 +884,7 @@ int main(int argc, char* argv[])
                         }
                         else
                         {
-                            exit(0);
+                            exit(1);
                         }
 
                         getline(cin, *reg);
@@ -817,7 +893,7 @@ int main(int argc, char* argv[])
                     }
                     else
                     {
-                        exit(0);
+                        exit(1);
                     }
                 }
                 else if(program[lineNumber][2] == *extendP)
@@ -861,7 +937,7 @@ int main(int argc, char* argv[])
                         }
                         else
                         {
-                            exit(0);
+                            exit(1);
                         }
 
                         getline(cin, *reg);
@@ -870,12 +946,12 @@ int main(int argc, char* argv[])
                     }
                     else
                     {
-                        exit(0);
+                        exit(1);
                     }
                 }
                 else
                 {
-                    exit(0);
+                    exit(1);
                 }
 
             }
@@ -962,19 +1038,20 @@ int main(int argc, char* argv[])
                 bool result = false;
 
                 // determine the operator
-                if (program[lineNumber][2] == "baNANAS")
+                if (program[lineNumber][2] == "baNANAS") // !=
                 {
                     result = (*reg1 != *reg2);
                 }
-                else if (program[lineNumber][2] == "baNanaS")
+                else if (program[lineNumber][2] == "baNanaS") // ==
                 {
                     result = (*reg1 == *reg2);
                 }
-                else if (program[lineNumber][2] == "baNANAs")
+                else if (program[lineNumber][2] == "baNANAs") // >
                 {
                     //convert strings to numbers to compare >/<
                     int64_t num1 = 0;
-                    for (size_t i = 0; (i < 64) && (i < reg1->size()); ++i)
+                    unsigned int numOneTotal = 0;
+                    for (size_t i = 0; i < reg1->size(); ++i)
                     {
                         if ((*reg1)[i] == 'B' || (*reg1)[i] == 'A' || (*reg1)[i] == 'N' || (*reg2)[i] == 'S')
                         {
@@ -984,9 +1061,15 @@ int main(int argc, char* argv[])
                         {
                             num1 <<= 0;
                         }
+                        if ((*reg1)[i] == ' ')
+                        {
+                            numOneTotal += num1;
+                            num1 = 0;
+                        }
                     }
 
                     int64_t num2 = 0;
+                    unsigned int numTwoTotal = 0;
                     for (size_t i = 0; (i < 64) && (i < reg2->size()); ++i)
                     {
                         if ((*reg2)[i] == 'B' || (*reg2)[i] == 'A' || (*reg2)[i] == 'N' || (*reg2)[i] == 'S')
@@ -997,14 +1080,20 @@ int main(int argc, char* argv[])
                         {
                             num1 <<= 0;
                         }
+                        if ((*reg2)[i] == ' ')
+                        {
+                            numTwoTotal += num2;
+                            num2 = 0;
+                        }
                     }
 
-                    result = (num1 > num2);
+                    result = (numOneTotal > numTwoTotal);
                 }
-                else if (program[lineNumber][2] == "baNANaS")
+                else if (program[lineNumber][2] == "baNANaS") // <
                 {
                     //convert strings to numbers to compare >/<
                     int64_t num1 = 0;
+                    unsigned int numOneTotal = 0;
                     for (size_t i = 0; (i < 64) && (i < reg1->size()); ++i)
                     {
                         if ((*reg1)[i] == 'B' || (*reg1)[i] == 'A' || (*reg1)[i] == 'N' || (*reg2)[i] == 'S')
@@ -1015,9 +1104,15 @@ int main(int argc, char* argv[])
                         {
                             num1 <<= 0;
                         }
+                        if ((*reg1)[i] == ' ')
+                        {
+                            numOneTotal += num1;
+                            num1 = 0;
+                        }
                     }
 
                     int64_t num2 = 0;
+                    unsigned int numTwoTotal = 0;
                     for (size_t i = 0; (i < 64) && (i < reg2->size()); ++i)
                     {
                         if ((*reg2)[i] == 'B' || (*reg2)[i] == 'A' || (*reg2)[i] == 'N' || (*reg2)[i] == 'S')
@@ -1028,9 +1123,14 @@ int main(int argc, char* argv[])
                         {
                             num1 <<= 0;
                         }
+                        if ((*reg2)[i] == ' ')
+                        {
+                            numTwoTotal += num2;
+                            num2 = 0;
+                        }
                     }
 
-                    result = (num1 < num2);
+                    result = (numOneTotal < numTwoTotal);
                 }
 
                 if (!result)
@@ -1216,7 +1316,7 @@ int main(int argc, char* argv[])
                         reg2 = &sReg8;
                     }
 
-                    if (program[lineNumber][1] == "baNAnAS")
+                    /*if (program[lineNumber][1] == "baNAnAS")
                     {
                         *reg = int2bs(bs2int(reg, translateList) / bs2int(reg2, translateList));
                     }
@@ -1251,7 +1351,7 @@ int main(int argc, char* argv[])
                     else if (program[lineNumber][1] == "baNanAS")
                     {
                         *reg = int2bs(bs2int(reg, translateList) ^ bs2int(reg2, translateList));
-                    }
+                    }*/
                 }
                 else
                 {
@@ -1270,7 +1370,7 @@ int main(int argc, char* argv[])
             else if (program[lineNumber][0] == "bananAs")
             {
                 if (program[lineNumber][1] != *extendP)
-                    exit(0);
+                    exit(1);
 
                 //determine the register
                 string* reg = nullptr;
@@ -1309,7 +1409,7 @@ int main(int argc, char* argv[])
                 }
                 else
                 {
-                    exit(0);
+                    exit(1);
                 }
 
                 //translate bananaStream internal representation into a number

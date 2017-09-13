@@ -18,8 +18,10 @@
  - and
  - or
 
-?label
-?goto
+ - goto
 
 ?split - multithread
 ?peel - exit
+
+
+change string comp
