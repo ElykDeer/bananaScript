@@ -1315,6 +1315,8 @@ int main(int argc, char* argv[])
                     {
                         reg2 = &sReg8;
                     }
+                    else
+                        exit(1);
 
                     /*if (program[lineNumber][1] == "baNAnAS")
                     {
@@ -1340,18 +1342,141 @@ int main(int argc, char* argv[])
                     {
                         *reg = int2bs(bs2int(reg, translateList) >> bs2int(reg2, translateList));
                     }
-                    else if (program[lineNumber][1] == "baNaNaS")
+                    else */if (program[lineNumber][1] == "baNaNaS") // string and
                     {
-                        *reg = int2bs(bs2int(reg, translateList) & bs2int(reg2, translateList));
+                        string newReg = "";
+                        int place = 0;
+                        for (size_t i = 0; (i < reg->length()) && (i < reg2->length()); ++i)
+                        {
+                            if (newReg.size() % 8 == 0)
+                            {
+                                newReg = " " + newReg;
+
+                                place = 0;
+                            }
+
+                            if ( (*reg)[(reg->length()-1)-i] == ' ' )
+                                continue;
+                            else if ( ((*reg)[(reg->length()-1)-i] == 'B' || (*reg)[(reg->length()-1)-i] == 'A' || (*reg)[(reg->length()-1)-i] == 'N' || (*reg)[(reg->length()-1)-i] == 'S') && ((*reg2)[(reg2->length()-1)-i] == 'B' || (*reg2)[(reg2->length()-1)-i] == 'A' || (*reg2)[(reg2->length()-1)-i] == 'N' || (*reg2)[(reg2->length()-1)-i] == 'S'))
+                            {
+                                //uppercase:
+                                if (place == 1 || place == 3 || place == 5)
+                                    newReg = "A" + newReg;
+                                else if (place == 2 || place == 4)
+                                    newReg = "N" + newReg;
+                                else if (place == 0)
+                                    newReg = "S" + newReg;
+                                else if (place == 6)
+                                    newReg = "B" + newReg;
+                            }
+                            else
+                            {
+                                //Else:
+                                if (place == 1 || place == 3 || place == 5)
+                                    newReg = "a" + newReg;
+                                else if (place == 2 || place == 4)
+                                    newReg = "n" + newReg;
+                                else if (place == 0)
+                                    newReg = "s" + newReg;
+                                else if (place == 6)
+                                    newReg = "b" + newReg;
+                            }
+
+                            ++place;
+                        }
+
+                        (*reg) = newReg;
                     }
-                    else if (program[lineNumber][1] == "baNaNas")
+                    else if (program[lineNumber][1] == "baNaNas")  // string or
                     {
-                        *reg = int2bs(bs2int(reg, translateList) | bs2int(reg2, translateList));
+                        string newReg = "";
+                        int place = 0;
+                        for (size_t i = 0; (i < reg->length()) && (i < reg2->length()); ++i)
+                        {
+                            if (newReg.size() % 8 == 0)
+                            {
+                                newReg = " " + newReg;
+
+                                place = 0;
+                            }
+
+                            if ( (*reg)[(reg->length()-1)-i] == ' ' )
+                                continue;
+                            else if ((*reg)[(reg->length()-1)-i] == 'B' || (*reg)[(reg->length()-1)-i] == 'A' || (*reg)[(reg->length()-1)-i] == 'N' || (*reg)[(reg->length()-1)-i] == 'S' || (*reg2)[(reg2->length()-1)-i] == 'B' || (*reg2)[(reg2->length()-1)-i] == 'A' || (*reg2)[(reg2->length()-1)-i] == 'N' || (*reg2)[(reg2->length()-1)-i] == 'S')
+                            {
+                                //uppercase:
+                                if (place == 1 || place == 3 || place == 5)
+                                    newReg = "A" + newReg;
+                                else if (place == 2 || place == 4)
+                                    newReg = "N" + newReg;
+                                else if (place == 0)
+                                    newReg = "S" + newReg;
+                                else if (place == 6)
+                                    newReg = "B" + newReg;
+                            }
+                            else
+                            {
+                                //Else:
+                                if (place == 1 || place == 3 || place == 5)
+                                    newReg = "a" + newReg;
+                                else if (place == 2 || place == 4)
+                                    newReg = "n" + newReg;
+                                else if (place == 0)
+                                    newReg = "s" + newReg;
+                                else if (place == 6)
+                                    newReg = "b" + newReg;
+                            }
+
+                            ++place;
+                        }
+
+                        (*reg) = newReg;
                     }
-                    else if (program[lineNumber][1] == "baNanAS")
+                    else if (program[lineNumber][1] == "baNanAS") // string xor
                     {
-                        *reg = int2bs(bs2int(reg, translateList) ^ bs2int(reg2, translateList));
-                    }*/
+                        string newReg = "";
+                        int place = 0;
+                        for (size_t i = 0; (i < reg->length()) && (i < reg2->length()); ++i)
+                        {
+                            if (newReg.size() % 8 == 0)
+                            {
+                                newReg = " " + newReg;
+
+                                place = 0;
+                            }
+
+                            if ( (*reg)[(reg->length()-1)-i] == ' ' )
+                                continue;
+                            else if ((*reg)[(reg->length()-1)-i] != (*reg2)[(reg2->length()-1)-i])
+                            {
+                                //uppercase:
+                                if (place == 1 || place == 3 || place == 5)
+                                    newReg = "A" + newReg;
+                                else if (place == 2 || place == 4)
+                                    newReg = "N" + newReg;
+                                else if (place == 0)
+                                    newReg = "S" + newReg;
+                                else if (place == 6)
+                                    newReg = "B" + newReg;
+                            }
+                            else
+                            {
+                                //Else:
+                                if (place == 1 || place == 3 || place == 5)
+                                    newReg = "a" + newReg;
+                                else if (place == 2 || place == 4)
+                                    newReg = "n" + newReg;
+                                else if (place == 0)
+                                    newReg = "s" + newReg;
+                                else if (place == 6)
+                                    newReg = "b" + newReg;
+                            }
+
+                            ++place;
+                        }
+
+                        (*reg) = newReg;
+                    }
                 }
                 else
                 {
