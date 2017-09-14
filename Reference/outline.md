@@ -14,7 +14,7 @@ __input__
 if _input_ < "17"
   "Too young!" screeches the Grand Council of Flying Monkeys.  You watch as their leathery wings unfold around you, casting a shadow that seems all-encompassing, as though they intend to devour the world.  The take of, the chorus of their wings beating with such intensity that you're forced down to your knees to bear the sheer force of the wind coming down upon you. You look up at the monkeys, one last time, your eyes welling up with tears in a futile attempt to fight the wind.  You see the monkeys preparing their bananananananananaGuns to fire their banananananananananaShells.  You hear someone laughing somewhere behind you, but before you can turn to look, the bananaSplits.
 
- - How can monkeys talk? And why are you following you their commands?
+ - How can monkeys talk? And why am I following you their commands?
 
  "WRITE DOWN YOUR SSN/CVV's/privatekeys- err I mean favorite food!," speaks the elder monkey.
  __input__
@@ -31,7 +31,7 @@ if _input_ != "BanaNAs!"
 
  "WRITE DOWN YOUR NAME," speaks the elder monkey.
  __input__
- - Maybe I'm getting the hand of this, maybe I'm going... nuts.
+ - Maybe I'm getting the hand of this, maybe I'm going... BANANAS!!.
 
 "Here is THE FLAG!!" speaks the elder monkey.
 __flag__
