@@ -1,0 +1,20 @@
+flag = gibberish
+banAnas baNanas bANAnAs bANANas bANANAS bANanaS BAnAnas bananaS bAnANAs banANaS bANanAs bANanaS banaNAs BAnanAs bAnaNAS bananaS bAnAnAS BAnanAs bANAnaS bANANas banaNaS bANaNas BAnAnAs bananas BAnAnAs bANaNas banAnas bANaNas bANanAs bAnaNas BAnAnAs bAnaNaS banaNaS bAnANAS BAnAnAs bANaNAs banaNaS bANAnAs banaNaS bANAnAs banaNaS bAnaNaS BAnaNAS
+flag = flag{}
+banAnas baNanas BANAnAs BANaNas BANANAS BANAnaS bAnAnas BanAnaS BAnANAs BanaNaS BANanAs BANAnaS BanaNAs bAnAnAs BAnaNAS BanAnaS BAnAnAS bAnAnAs BANAnaS BANaNas BanaNaS BANANas bAnAnAs BanAnas bAnAnAs BANANas BanAnas BANANas BANanAs BAnANas bAnAnAs BAnANaS BanaNaS BAnaNAS bAnAnAs BANANAs BanaNaS BANanAs BanaNaS BANanAs BanaNaS BAnANaS bAnaNAS
+read reg1
+bananaS banANAS
+print flag
+bananas banAnas
+xor
+banAnas baNanAS banANAS
+print flag
+bananas banAnas
+xor
+banAnas baNanAS banANAS
+print flag
+bananas banAnas
+xor
+banAnas baNanAS banANAS
+print flag
+bananas banAnas
